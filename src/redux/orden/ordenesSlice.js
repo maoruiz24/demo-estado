@@ -41,7 +41,7 @@ export const ordenesSlice = createSlice({
         };
     },
     adicionarProducto: (state, action) => {
-        return state.push(action.payload.producto);
+      return state.push(action.payload.producto);
     },
     eliminarCliente: state => {
         return (state.cliente = initialState.cliente);
