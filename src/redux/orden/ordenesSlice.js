@@ -6,8 +6,8 @@ export const ordenesSlice = createSlice({
   initialState: initialState,
 
   reducers: {
-    eliminarOrden: (state) => {
-      return (state = initialState);
+    eliminarOrden: state => {
+      state = initialState;
     },
     actualizarOrden: (state, action) => {
       const { ordenNo, fechaEntrega, fechaCompra, taxValor, precioTotal } =
@@ -21,59 +21,64 @@ export const ordenesSlice = createSlice({
         precioTotal: precioTotal,
       };
     },
-    adicionarOrden: (state, action) => {
-        return state.push(action.payload);
-    },
-    eliminarProducto: (state) => {
-        return (state.producto = initialState.producto);
+    eliminarProducto: (state,action) => {
+        const{id}= action.payload;
+        const newProducto= state.producto.filter((x)=>{
+          x.id !== id
+        })
+        state.producto = newProducto;
     },
     actualizarProducto: (state, action) => {
-        const {
-          idProducto,
-          nomProducto,
-          precio,
-          // caracteristicas?????
-        } = action.payload.producto;
+        const { id, cantidad } = action.payload.producto;
+        
+        const newProducto = state.producto.map((x)=>
+          x.id === id? {...x, cantidad: cantidad} : x
+        )
+
         return {
           ...state,
-          idProducto: idProducto,
-          nomProducto: nomProducto,
-          precio: precio,
+          producto : newProducto
         };
     },
     adicionarProducto: (state, action) => {
         return state.push(action.payload.producto);
     },
-    eliminarCliente: (state, action) => {
+    eliminarCliente: state => {
         return (state.cliente = initialState.cliente);
     },
     actualizarCliente: (state, action) => {
         const {
-          idCliente,
+          id,
           nombre,
           correo,
           telefono,
           direccion,
         } = action.payload.cliente;
+
+     const newCliente = state.cliente.map((x) =>
+       x.id === id ? { id:id, nombre:nombre, correo:correo, telefono:telefono, direccion:direccion } : x
+     );
+
         return {
           ...state,
-          idCliente: idCliente,
-          nombre: nombre,
-          correo: correo,
-          telefono: telefono,
-          direccion: direccion,
+          cliente : newCliente
         };
     },
     adicionarCliente: (state, action) => {
-      return state.push(action.payload.cliente);
+       state.cliente = action.payload.cliente;
     },
   },
 });
 
 export const selectOrden = (state) => state.ordenes.Orderno;
 
-export const { eliminarOrden, actualizarOrden, adicionarOrden, 
-               eliminarProducto, actualizarProducto, adicionarProducto,
-               eliminarCliente, actualizarCliente, adicionarCliente } = ordenesSlice.actions;
+export const { eliminarOrden,
+actualizarOrden,
+eliminarProducto,
+actualizarProducto,
+adicionarProducto,
+eliminarCliente,
+actualizarCliente,
+adicionarCliente } = ordenesSlice.actions;
 
 export default ordenesSlice.reducer;

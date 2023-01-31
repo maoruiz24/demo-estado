@@ -4,17 +4,18 @@ export const initialState = {
   fechaCompra: "",
   taxValor:0,
   precioTotal:0,
-              cliente: [{
-                idCliente:0,
+              cliente: {
+                id:0,
                 nombre:"",
                 correo :"",
                 telefono:0,
                 direccion:"",
-              }],
+              },
               producto: [{
-                idProducto:0,
-                nomProducto:"",
+                id:0,
+                nombre:"",
                 precio:0,
+                cantidad:0,
                            caracteristicas:{
                                   color:"",
                                   descripcion:"",

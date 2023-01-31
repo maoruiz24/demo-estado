@@ -1,6 +1,6 @@
 import Ordenes from './componentes/screens/Ordenes'
 import { Provider } from "react-redux";
-import  store  from "./redux/store";
+import  store  from "./store";
 
 function App() {
   return (

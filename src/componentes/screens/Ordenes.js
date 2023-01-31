@@ -14,20 +14,18 @@ import {
 
 function reducer(state, action) {
   switch (action.type) {
-    case "increment":
+    case "":
       return ;
-    case "decrement":
+    case "":
       return ;
   }
 }
-
 
 function Ordenes(){
   const [state, dispatch] = useReducer(reducer, initialState);
   const count = useSelector(selectOrden);
       return (
         <>
-
         </>
       );
 }
